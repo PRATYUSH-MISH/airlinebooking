@@ -1,39 +1,69 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Navbar from './Nav';
 import './FlightSearch.css';
+import { useLocation } from 'react-router-dom';
 
-const FlightSearch = ({ bookingData }) => {
+const FlightSearch = () => {
+    const location = useLocation();
+    const { bookingData } = location.state || {};
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const [flights, setFlights] = useState([]);
-
-  
+const navigate=useNavigate();
     useEffect(() => {
-    const fetchFlights =async () => {
-        try {
-            const response = await fetch('http://localhost:8000/flight/check');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+        const fetchFlights = async () => {
+            if (!bookingData) {
+                setError('Booking data is missing.');
+                setLoading(false);
+                return;
             }
-            const data = await response.json();
-            console.log('Fetched availabe data:', data);
-            setFlights(data); // Corrected from setBookings(data)
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
+
+            try {
+                const response = await fetch('http://localhost:8000/flight/check', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        originAirport: bookingData.originAirport,
+                        destinationAirport: bookingData.destinationAirport,
+                        departDate: bookingData.departDate,
+                        seat: bookingData.seat,
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                console.log('Fetched available flights data:', data);
+                setFlights(data.flights);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchFlights();
+    }, [bookingData]);
+
+//added 
+    const handleSelectFlight = (flight) => {
+        const bookingId = `BOOK-${Date.now()}`; // Generate a unique booking ID
+        navigate('/addpassenger', { state: { flight, bookingId, bookingData } });
     };
 
-    fetchFlights();
-}, []);
 
     if (loading) {
         return <div>Loading...</div>;
     }
 
     if (error) {
-        return <div>Error fetching bookings: {error}</div>;
+        return <div>Error fetching flights: {error}</div>;
     }
 
     return (
@@ -66,6 +96,13 @@ const FlightSearch = ({ bookingData }) => {
                                         <td>{flight.arrival_time}</td>
                                         <td>{flight.duration}</td>
                                         <td>{flight[`${bookingData.seat}_fare`]}</td>
+{/* added */}
+                                        <td>
+                                            <button onClick={() => handleSelectFlight(flight)}>
+                                                Select
+                                            </button>
+                                        </td>
+
                                     </tr>
                                 ))}
                             </tbody>

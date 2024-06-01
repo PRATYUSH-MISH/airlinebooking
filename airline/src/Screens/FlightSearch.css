@@ -3,16 +3,16 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #0c0c0c;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(162, 143, 143, 0.1);
 }
 
 .flight-search h1 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: #f3d2d2;
 }
 
 .flight-search form {
@@ -27,7 +27,7 @@
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #555;
+    color: #f8eeee;
 }
 
 .input-row input[type="text"],
@@ -78,7 +78,7 @@
     text-align: center;
     margin-bottom: 20px;
     font-size: 20px;
-    color: #333;
+    color: #fcfcfc;
 }
 
 .flights-table {
@@ -95,14 +95,14 @@
 }
 
 .flights-table th {
-    background-color: #f2f2f2;
+    background-color: #efb3b3;
     color: #333;
 }
 
 .flights-table td {
-    background-color: #fff;
+    background-color: #201f1f;
 }
 
 .flights-table tr:nth-child(even) td {
-    background-color: #f9f9f9;
+    background-color: #0d0d0d;
 }

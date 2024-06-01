@@ -19,9 +19,9 @@ router.get('/', async (req, res) => {
       
         const cursor = coll.find();
         const results = await cursor.toArray();
-       
+        // console.log('Fetched data',results)
         res.json(results);
-      //  console.log('Fetched data:', results);
+       
     } catch (err) {
         console.error(err);
         res.status(500).send("Error fetching data");

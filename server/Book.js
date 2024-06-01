@@ -1,3 +1,5 @@
+// book.js
+
 const express = require('express');
 const router = express.Router();
 const { MongoClient } = require('mongodb');
@@ -5,17 +7,16 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './config.env' });
 
-const bookings = []; // Define the bookings array in the correct scope
-
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
+
+const bookings = []; // Define the bookings array in the correct scope
 
 router.post('/', async (req, res) => {
     const { tripType, origin, destination, departDate, returnDate, seat } = req.body;
 
     console.log('Received booking data:', req.body);
 
-    // Simple validation (you can extend this as needed)
     if (!tripType || !origin || !destination || !departDate || !seat) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
@@ -26,7 +27,6 @@ router.post('/', async (req, res) => {
         const airportsColl = db.collection("airports");
         const flightsColl = db.collection("domesticflight");
 
-        // Find the airport codes for the origin and destination cities
         const originAirport = await airportsColl.findOne({ city: origin });
         const destinationAirport = await airportsColl.findOne({ city: destination });
 
@@ -37,29 +37,37 @@ router.post('/', async (req, res) => {
         const originCode = originAirport.code;
         const destinationCode = destinationAirport.code;
 
-        // Convert departDate to a weekday (1 for Monday, 2 for Tuesday, ..., 7 for Sunday)
         const departWeekday = new Date(departDate).getUTCDay() + 1;
 
-        // Query to find matching flights
         const query = {
             origin: originCode,
             destination: destinationCode,
             depart_weekday: departWeekday,
-            [`${seat}_fare`]: { $exists: true }  // Ensure fare is available for the selected seat
+            [`${seat}_fare`]: { $exists: true }
         };
 
         const flights = await flightsColl.find(query).toArray();
 
         if (flights.length > 0) {
-            res.status(200).json(flights);
+            const newBooking = {
+                tripType,
+                originAirport: {
+                    city: originAirport.city,
+                    code: originAirport.code,
+                },
+                destinationAirport: {
+                    city: destinationAirport.city,
+                    code: destinationAirport.code,
+                },
+                departDate,
+                returnDate,
+                seat
+            };
+            bookings.push(newBooking);
+            res.status(200).json(newBooking);
         } else {
             res.status(404).json({ message: 'No flights found for the given criteria' });
         }
-
-        // Save the booking data for reference (optional)
-        const newBooking = { tripType, origin, destination, departDate, returnDate, seat };
-        bookings.push(newBooking);
-
     } catch (error) {
         console.error('Error checking flight availability:', error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -78,3 +86,99 @@ router.get('/bookings', (req, res) => {
 });
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const express = require('express');
+// const router = express.Router();
+// const { MongoClient } = require('mongodb');
+// const dotenv = require('dotenv');
+
+// // Load environment variables from .env file
+// dotenv.config({ path: './config.env' });
+
+// // Connection URI
+// const uri = process.env.MONGODB_URI;
+// const client = new MongoClient(uri);
+
+// // POST /book/bookings route to handle booking submissions
+// router.post('/bookings', async (req, res) => {
+//     const { tripType, origin, destination, departDate, returnDate, seat } = req.body;
+
+//     try {
+//         await client.connect();
+//         const db = client.db("data");
+//         const domesticFlightsCollection = db.collection("domesticflights");
+//         const airportsCollection = db.collection("airports");
+
+//         // Fetch the origin and destination airport details
+//         const originAirport = await airportsCollection.findOne({ city: origin });
+//         const destinationAirport = await airportsCollection.findOne({ city: destination });
+
+//         if (!originAirport || !destinationAirport) {
+//             return res.status(404).json({ error: 'Origin or destination airport not found' });
+//         }
+
+//         // Fetch flights that match the criteria
+//         const flights = await domesticFlightsCollection.find({
+//             originCode: originAirport.code,
+//             destinationCode: destinationAirport.code,
+//             departDate: departDate,
+//             seat: seat
+//         }).toArray();
+
+//         // Add the airport details to the flights data
+//         const flightsWithDetails = flights.map(flight => ({
+//             ...flight,
+//             originAirport,
+//             destinationAirport
+//         }));
+
+//         res.json(flightsWithDetails);
+//     } catch (err) {
+//         console.error('Error fetching data:', err);
+//         res.status(500).send("Error fetching data");
+//     } finally {
+//         await client.close();
+//     }
+// });
+
+// module.exports = router;

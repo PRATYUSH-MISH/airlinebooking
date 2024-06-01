@@ -13,6 +13,8 @@
     "@auth0/auth0-react": "^2.2.4",
     "bootstrap": "^5.3.3",
     "install": "^0.13.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "npm": "^10.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

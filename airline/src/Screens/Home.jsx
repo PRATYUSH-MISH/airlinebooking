@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect, useState, useMemo } from 'react';
 import Navbar from './Nav';
 import IMG2 from '../static/img/plane3.1.jpg';
 import './Home.css';
@@ -12,8 +13,6 @@ const Home = () => {
   const [returnDate, setReturnDate] = useState('');
   const [seat, setSeat] = useState('economy');
   const [data, setData] = useState([]);
-  const [filteredOrigins, setFilteredOrigins] = useState([]);
-  const [filteredDestinations, setFilteredDestinations] = useState([]);
   const [showOriginSuggestions, setShowOriginSuggestions] = useState(false);
   const [showDestinationSuggestions, setShowDestinationSuggestions] = useState(false);
 
@@ -23,31 +22,28 @@ const Home = () => {
   const maxDate = '2023-12-31';
 
   useEffect(() => {
-    // Fetch data from the server when the component mounts
-    fetch('http://localhost:8000/things')
+    fetch('http://localhost:8000/')
       .then(response => response.json())
-      .then(data => {
-        setData(data);
-        setFilteredOrigins(data);
-        setFilteredDestinations(data);
-      })
+      .then(data => setData(data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
+
+  const filteredOrigins = useMemo(() => {
+    return data.filter(item => item.city.toLowerCase().includes(origin.toLowerCase()));
+  }, [origin, data]);
+
+  const filteredDestinations = useMemo(() => {
+    return data.filter(item => item.city.toLowerCase().includes(destination.toLowerCase()));
+  }, [destination, data]);
+
+
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('Form submitted with data:', {
-      tripType,
-      origin,
-      destination,
-      departDate,
-      returnDate,
-      seat,
-    });
-
     try {
-      const response = await fetch('http://localhost:8000/book/bookings', {
+      const response = await fetch('http://localhost:8000/book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +59,7 @@ const Home = () => {
       });
 
       if (response.ok) {
-        navigate('/bookings'); // Redirect to bookings.jsx
+        navigate('/bookings');
       } else {
         const errorData = await response.json();
         console.error('Error response:', errorData);
@@ -73,6 +69,32 @@ const Home = () => {
       console.error('Error submitting booking:', error);
       alert('An error occurred. Please try again later.');
     }
+  };
+
+
+
+
+  const handleOriginChange = (e) => {
+    const inputValue = e.target.value;
+    setOrigin(inputValue);
+    setShowOriginSuggestions(true);
+  };
+
+  const handleDestinationChange = (e) => {
+    const inputValue = e.target.value;
+    setDestination(inputValue);
+    setShowDestinationSuggestions(true);
+  };
+
+
+  const handleOriginSelect = (city) => {
+    setOrigin(city);
+    setShowOriginSuggestions(false);
+  };
+
+  const handleDestinationSelect = (city) => {
+    setDestination(city);
+    setShowDestinationSuggestions(false);
   };
 
   return (
@@ -129,24 +151,20 @@ const Home = () => {
                         id="flight-from"
                         className="form-control mr-sm-3"
                         value={origin}
-                        onChange={(e) => {
-                          setOrigin(e.target.value);
-                          setShowOriginSuggestions(true);
-                          setFilteredOrigins(data.filter(item => item.city.toLowerCase().includes(e.target.value.toLowerCase())));
-                        }}
+                        onChange={handleOriginChange}
                         autoComplete="off"
                         onFocus={() => setShowOriginSuggestions(true)}
+                        aria-autocomplete="list"
+                        aria-controls="origin-suggestions"
+                        aria-expanded={showOriginSuggestions}
                       />
                       {showOriginSuggestions && (
-                        <div className="suggestions">
+                        <div className="suggestions" id="origin-suggestions">
                           {filteredOrigins.map(item => (
                             <div
                               key={item._id}
                               className="suggestion"
-                              onClick={() => {
-                                setOrigin(item.city);
-                                setShowOriginSuggestions(false);
-                              }}
+                              onClick={() => handleOriginSelect(item.city)}
                             >
                               {item.city}, {item.country}
                             </div>
@@ -163,24 +181,20 @@ const Home = () => {
                         id="flight-to"
                         className="form-control mr-sm-3"
                         value={destination}
-                        onChange={(e) => {
-                          setDestination(e.target.value);
-                          setShowDestinationSuggestions(true);
-                          setFilteredDestinations(data.filter(item => item.city.toLowerCase().includes(e.target.value.toLowerCase())));
-                        }}
+                        onChange={handleDestinationChange}
                         autoComplete="off"
                         onFocus={() => setShowDestinationSuggestions(true)}
+                        aria-autocomplete="list"
+                        aria-controls="destination-suggestions"
+                        aria-expanded={showDestinationSuggestions}
                       />
                       {showDestinationSuggestions && (
-                        <div className="suggestions">
+                        <div className="suggestions" id="destination-suggestions">
                           {filteredDestinations.map(item => (
                             <div
                               key={item._id}
                               className="suggestion"
-                              onClick={() => {
-                                setDestination(item.city);
-                                setShowDestinationSuggestions(false);
-                              }}
+                              onClick={() => handleDestinationSelect(item.city)}
                             >
                               {item.city}, {item.country}
                             </div>
@@ -246,12 +260,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-
-
-
-
-
-
-

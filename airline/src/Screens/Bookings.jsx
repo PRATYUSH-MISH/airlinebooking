@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from './Nav';
 import './Bookings.css';
 
@@ -6,6 +7,7 @@ const Bookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -15,7 +17,7 @@ const Bookings = () => {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log('Fetched bookings data:', data); 
+                console.log('Fetched bookings data:', data);
                 setBookings(data);
             } catch (error) {
                 setError(error.message);
@@ -26,6 +28,10 @@ const Bookings = () => {
 
         fetchBookings();
     }, []);
+
+    const handleBookingClick = (booking) => {
+        navigate('/flight', { state: {bookingData: booking } });
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -52,17 +58,21 @@ const Bookings = () => {
                                 <th>Departure Date</th>
                                 <th>Return Date</th>
                                 <th>Seat</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {bookings.map((booking, index) => (
                                 <tr key={index}>
-                                    <td>{booking.tripType}</td>
-                                    <td>{booking.origin}</td>
-                                    <td>{booking.destination}</td>
+                                    <td>{booking.tripType === '1' ? 'One-way' : 'Round Trip'}</td>
+                                    <td>{booking.originAirport.city} ({booking.originAirport.code})</td>
+                                    <td>{booking.destinationAirport.city} ({booking.destinationAirport.code})</td>
                                     <td>{booking.departDate}</td>
                                     <td>{booking.returnDate || 'N/A'}</td>
                                     <td>{booking.seat}</td>
+                                    <td>
+                                        <button onClick={() => handleBookingClick(booking)}>View Flight</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

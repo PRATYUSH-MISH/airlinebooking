@@ -1,0 +1,20 @@
+/* UserProfile.css */
+
+.user-profile {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.user-profile h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.flight-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* FlightCard component styles can be added here if needed */

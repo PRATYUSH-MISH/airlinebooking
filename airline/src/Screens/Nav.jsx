@@ -61,7 +61,7 @@ const Nav = () => {
                         </li>
                         <li className="nav__item">
                             <NavLink
-                                to="/location"
+                                to="/profile"
                                 className="nav__link"
                                 onClick={closeMenuOnMobile}
                             >
