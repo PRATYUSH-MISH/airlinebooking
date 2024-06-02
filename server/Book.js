@@ -25,7 +25,8 @@ router.post('/', async (req, res) => {
         await client.connect();
         const db = client.db("data");
         const airportsColl = db.collection("airports");
-        const flightsColl = db.collection("domesticflight");
+        const domesticFlightsColl = db.collection("domesticflight");
+        const internationalFlightsColl = db.collection("internationalflight");
 
         const originAirport = await airportsColl.findOne({ city: origin });
         const destinationAirport = await airportsColl.findOne({ city: destination });
@@ -39,14 +40,24 @@ router.post('/', async (req, res) => {
 
         const departWeekday = new Date(departDate).getUTCDay() + 1;
 
-        const query = {
+        const domesticQuery = {
             origin: originCode,
             destination: destinationCode,
             depart_weekday: departWeekday,
             [`${seat}_fare`]: { $exists: true }
         };
 
-        const flights = await flightsColl.find(query).toArray();
+        const internationalQuery = {
+            origin: originCode,
+            destination: destinationCode,
+            depart_weekday: departWeekday,
+            [`${seat}_fare`]: { $exists: true }
+        };
+
+        const domesticFlights = await domesticFlightsColl.find(domesticQuery).toArray();
+        const internationalFlights = await internationalFlightsColl.find(internationalQuery).toArray();
+
+        const flights = domesticFlights.concat(internationalFlights);
 
         if (flights.length > 0) {
             const newBooking = {
