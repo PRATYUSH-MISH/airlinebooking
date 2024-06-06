@@ -16,7 +16,12 @@ router.post('/check', async (req, res) => {
 
         const originCode = originAirport.code;
         const destinationCode = destinationAirport.code;
+<<<<<<< HEAD
         const departWeekday = new Date(departDate).getUTCDay() + 1;
+=======
+
+        const departWeekday = new Date(departDate).getUTCDay()+1; // Get the day of the week (0=Sunday, 6=Saturday)
+>>>>>>> b28f6e39919221a4168f11805192e6d54478cc3e
 
         const query = {
             origin: originCode,
@@ -24,13 +29,29 @@ router.post('/check', async (req, res) => {
             depart_weekday: departWeekday,
             [`${seat}_fare`]: { $exists: true }
         };
+        const internationalquery={
+            origin: originCode,
+            destination: destinationCode,
+            depart_weekday: departWeekday,
+            [`${seat}_fare`]:{$exists:true}
+        }
 
+<<<<<<< HEAD
         const domesticFlights = await flightsColl.find(query).toArray();
         const internationalFlights = await internationalFlightsColl.find(query).toArray();
 
         const flights = [...domesticFlights, ...internationalFlights];
 
         if (flights.length > 0) {
+=======
+        const domesticflights = await flightsColl.find(query).toArray();
+        const internationalflights=await internationalFlightsColl.find(internationalquery).toArray();
+     const flights={
+        domestic :domesticflights,
+        international:internationalflights
+     }
+        if (domesticflights.length || internationalflights > 0) {
+>>>>>>> b28f6e39919221a4168f11805192e6d54478cc3e
             res.status(200).json({ flights });
         } else {
             res.status(404).json({ message: 'No flights found for the given criteria' });
@@ -42,3 +63,11 @@ router.post('/check', async (req, res) => {
 });
 
 module.exports = router;
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> b28f6e39919221a4168f11805192e6d54478cc3e
