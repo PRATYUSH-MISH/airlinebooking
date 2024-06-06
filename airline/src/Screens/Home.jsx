@@ -35,13 +35,14 @@ const Home = () => {
     return data.filter(item => item.city.toLowerCase().includes(destination.toLowerCase()));
   }, [destination, data]);
 
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-//changes 
-   
+
+    if (!localStorage.getItem('authToken')) {
+      navigate('/login');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:8000/book', {
         method: 'POST',
@@ -71,9 +72,6 @@ const Home = () => {
     }
   };
 
-
-
-
   const handleOriginChange = (e) => {
     const inputValue = e.target.value;
     setOrigin(inputValue);
@@ -85,7 +83,6 @@ const Home = () => {
     setDestination(inputValue);
     setShowDestinationSuggestions(true);
   };
-
 
   const handleOriginSelect = (city) => {
     setOrigin(city);
@@ -260,5 +257,4 @@ const Home = () => {
 };
 
 export default Home;
-
 
