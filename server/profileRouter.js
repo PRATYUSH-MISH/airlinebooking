@@ -1,32 +1,19 @@
-// profileRouter.js
-
 const express = require('express');
 const router = express.Router();
-const Flight = require('../models/Flight');
+const authMiddleware = require('./authenticateToken');
+const collection = require('./mongo');
 
-// Get all flights booked by the user
-router.get('/', async (req, res) => {
+router.get('/profile', authMiddleware.authenticateToken, async (req, res) => {
     try {
-        // Assume you have a way to authenticate users and get their ID
-        const userId = req.user.id;
+       const userData=req.user;
+       console.log("User data:",userData);
+       const userId=userData.id;
+       const user=await collection.findById(userId)
 
-        const flights = await Flight.find({ userId });
-        res.json(flights);
-    } catch (error) {
-        console.error('Error fetching flights:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
 
-// Delete a booked flight by ID
-router.delete('/:id', async (req, res) => {
-    try {
-        const flightId = req.params.id;
-        // Assuming you have some logic to ensure the user owns this flight
-        await Flight.findByIdAndDelete(flightId);
-        res.json({ message: 'Flight deleted successfully' });
+        res.json({ message: 'hello from profile', user });
     } catch (error) {
-        console.error('Error deleting flight:', error);
+        console.error('Error fetching user profile:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });

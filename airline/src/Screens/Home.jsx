@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useMemo } from 'react';
 import Navbar from './Nav';
 import IMG2 from '../static/img/plane3.1.jpg';
@@ -37,11 +36,12 @@ const Home = () => {
   }, [destination, data]);
 
 
- 
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+//changes 
+   
     try {
       const response = await fetch('http://localhost:8000/book', {
         method: 'POST',
@@ -260,3 +260,5 @@ const Home = () => {
 };
 
 export default Home;
+
+

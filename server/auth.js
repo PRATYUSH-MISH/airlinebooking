@@ -1,20 +1,30 @@
-const express = require('express')
+const express = require('express');
 const bcrypt = require('bcrypt');
-const app = express();
+const { authenticateToken, generateToken } = require("./authenticateToken")
 
+const app = express();
+const router = express.Router();
+const collection = require('./mongo');
+
+// JWT secret key
+const jwtSecret = require("./jwtConfig");
+
+// Middleware to parse JSON requests
 app.use(express.json());
-const router = express.Router()
-const collection = require('./mongo')
-router.get(('/'), (req, res) => {
-    res.send("hello from AUTH ")
+
+// Test route to ensure the auth service is running
+router.get('/', (req, res) => {
+    res.send("hello from AUTH");
 });
 
 
-router.post("/login", async (req, res) => {
+
+// Login route
+router.post("/login" ,async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Check if email or password is missing
+        // Validate email and password input
         if (!email || !password) {
             return res.status(400).json({ error: "Please provide both email and password" });
         }
@@ -27,45 +37,61 @@ router.post("/login", async (req, res) => {
         }
         console.log('User found:', user);
 
-        // Compare password with the hashed password in the database
+        // Compare input password with the hashed password in the database
         const isMatch = await bcrypt.compare(password, user.password);
-        //  console.log('Password match:', isMatch);
-        // If passwords don't match, return error
         if (!isMatch) {
             return res.status(400).json({ error: "Invalid credentials" });
         }
 
-        // If credentials are correct, send a success response
-        res.status(200).json({ message: "User signed in successfully", name: user.name });
+        // Generate JWT token
+        const token = generateToken({ id: user._id, email: user.email })
+        console.log("Token is :", token);
+
+        
+
+
+        // Send success response with the auth token
+        res.status(200).json({ message: "User signed in successfully", token });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
+// Signup route
 router.post("/signup", async (req, res) => {
     const { name, email, password } = req.body;
 
+    // Validate input fields
     if (!name || !email || !password) {
         return res.status(422).json({ error: "Please fill all the fields" });
     }
 
     try {
-        const userExist = await collection.findOne({ email: email });
-
+        // Check if user already exists
+        const userExist = await collection.findOne({ email });
         if (userExist) {
             return res.status(422).json({ error: "Email already exists" });
         }
 
-        // Hash the password before saving
-
+        // Create new user with hashed password
         const user = new collection({ name, email, password });
+      const response= await user.save();
 
-        await user.save();
-        return res.status(201).json({ message: "User created successfully" });
+
+
+//token 
+        const token = generateToken({ id: response._id, email: response.email })
+    console.log("Token is :",token);
+
+
+
+        // Send success response
+        res.status(201).json({ message: "User created successfully",response:response,token:token });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
 module.exports = router;

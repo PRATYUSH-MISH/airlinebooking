@@ -1,9 +1,17 @@
-import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import React, { useState } from 'react';
+import Login from './Login';
 
-const PrivateComponent = () => {
-    const auth = localStorage.getItem('user');
+function ParentComponent() {
+    const handleLogin = (name) => {
+        // Logic to handle login, such as setting user data in state or local storage
+        console.log('User logged in:', name);
+    };
 
-    return auth ? <Outlet /> : <Navigate to="signup" />
+    return (
+        <div>
+            <Login handleLogin={handleLogin} />
+        </div>
+    );
 }
-export default PrivateComponent;
+
+export default ParentComponent;

@@ -28,9 +28,11 @@ function Login() {
         window.alert("INVALID CREDENTIALS");
       } else {
         window.alert("LOGIN SUCCESSFUL!");
-        // Navigate to the home page after successful login
-        navigate('/', { state: { id: data.name } }); // Assuming backend sends user name in response and show your name to home page
-
+      
+      localStorage.setItem("authToken",data.token) 
+      console.log(localStorage.getItem("authToken"));
+     // handleLogin(data.name);
+        navigate('/');
       }
     } catch (error) {
       console.error("Error:", error.message);
@@ -78,22 +80,3 @@ function Login() {
 export default Login;
 
 
-
-// <div className="login">
-
-//     <h1>Login</h1>
-
-//     <form action="POST">
-//         <input type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Email" />
-//         <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" />
-//         <input type="submit" onClick={submit} />
-
-//     </form>
-
-//     <br />
-//     <p>OR</p>
-//     <br />
-
-// <Link to="/signup">Signup Page</Link>
-
-// </div>

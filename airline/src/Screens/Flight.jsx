@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import Navbar from './Nav';
 import './FlightSearch.css';
 import { useLocation } from 'react-router-dom';
@@ -11,7 +10,8 @@ const FlightSearch = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const [flights, setFlights] = useState([]);
-const navigate=useNavigate();
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchFlights = async () => {
             if (!bookingData) {
@@ -40,7 +40,11 @@ const navigate=useNavigate();
 
                 const data = await response.json();
                 console.log('Fetched available flights data:', data);
-                setFlights(data.flights);
+                if (Array.isArray(data.flights)) {
+                    setFlights(data.flights);
+                } else {
+                    throw new Error('Flights data is not an array');
+                }
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -51,12 +55,10 @@ const navigate=useNavigate();
         fetchFlights();
     }, [bookingData]);
 
-//added 
     const handleSelectFlight = (flight) => {
-        const bookingId = `BOOK-${Date.now()}`; // Generate a unique booking ID
+        const bookingId = `BOOK-${Date.now()}`;
         navigate('/addpassenger', { state: { flight, bookingId, bookingData } });
     };
-
 
     if (loading) {
         return <div>Loading...</div>;
@@ -85,6 +87,7 @@ const navigate=useNavigate();
                                     <th>Arrival Time</th>
                                     <th>Duration</th>
                                     <th>Fare</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -96,13 +99,11 @@ const navigate=useNavigate();
                                         <td>{flight.arrival_time}</td>
                                         <td>{flight.duration}</td>
                                         <td>{flight[`${bookingData.seat}_fare`]}</td>
-{/* added */}
                                         <td>
                                             <button onClick={() => handleSelectFlight(flight)}>
                                                 Select
                                             </button>
                                         </td>
-
                                     </tr>
                                 ))}
                             </tbody>

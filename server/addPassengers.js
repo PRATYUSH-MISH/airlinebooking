@@ -13,6 +13,7 @@ router.post('/add', async (req, res) => {
         const db = await connectToDatabase();
         const passengersColl = db.collection("passengers");
 
+        
         const newPassenger = { name, age, gender, bookingId };
         const result = await passengersColl.insertOne(newPassenger);
 
