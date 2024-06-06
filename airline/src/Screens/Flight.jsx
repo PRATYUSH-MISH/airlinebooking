@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Nav';
@@ -40,8 +41,8 @@ const FlightSearch = () => {
 
                 const data = await response.json();
                 console.log('Fetched available flights data:', data);
-                if (Array.isArray(data.flights)) {
-                    setFlights(data.flights);
+                if (Array.isArray(data)) {
+                    setFlights(data);
                 } else {
                     throw new Error('Flights data is not an array');
                 }
@@ -116,3 +117,4 @@ const FlightSearch = () => {
 };
 
 export default FlightSearch;
+
