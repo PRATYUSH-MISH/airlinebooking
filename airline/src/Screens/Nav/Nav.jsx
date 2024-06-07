@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import "./Navbar.css";
 
-import Logo from "../static/img/icon.png"
+import Logo from "../img/icon.png"
 //const navigate=useNavigate();
 const Nav = () => {
 

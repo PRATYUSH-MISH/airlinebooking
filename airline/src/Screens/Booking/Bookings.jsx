@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from './Nav';
+import Navbar from '../Nav/Nav';
 import './Bookings.css';
 
 const Bookings = ({ isLoggedIn }) => {

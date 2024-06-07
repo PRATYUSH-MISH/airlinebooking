@@ -27,31 +27,3 @@ const generateToken=(userData)=>{
 module.exports={authenticateToken,generateToken}
 
 
-
-
-
-
-
-// const authenticateToken = (req, res, next) => {
-//     const authHeader = req.header('Authorization');
-//     if (!authHeader) return res.status(401).json({ message: "Missing token! :Access Denied" });
-
-//     const [bearer, token] = authHeader.split(" ")
-//     if (bearer !== "Bearer" || !token) {
-//         return res.status(401).json({ message: "Unauthorized :invalid token Fromat" })
-
-//     }
-//     jwt.verify(token, secretKey, (err, user) => {
-//         if (!err) {
-//             return res.status(400).json({ message: "Forbidden :Invalid Token" })
-//         }
-//         req.user = user;
-        
-//         next();
-//     })
-            
-// };
-// // function verifyToken(token) {
-// //     return jwt.verify(token, secretKey);
-// // }
-// module.exports = { authenticateToken, verifyToken }

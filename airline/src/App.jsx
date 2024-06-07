@@ -3,18 +3,18 @@ import React ,{useState}from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from "./Screens/Home";
-import Profile from "./Screens/UserProfile"
-import Login from "./Screens/Login";
-import Signup from './Screens/Signup';
-import Bookings from './Screens/Bookings';
-import FlightSearch from './Screens/Flight';
-import Navbar from './Screens/Nav';
-import Payment from './Screens/Payment';
-import AddPassengers from './Screens/AddPassengeer';
+import Profile from "./Screens/UserProfile/UserProfile"
+import Login from "./Screens/Auth/Login";
+import Signup from './Screens/Auth/Signup';
+import Bookings from './Screens/Booking/Bookings';
+import FlightSearch from './Screens/Flight/Flight';
+import Navbar from './Screens/Nav/Nav';
+import Payment from './Screens/Payment/Payment';
+import AddPassengers from './Screens/AddPassengers/AddPassengeer';
 //import ProtectedRoute from './Screens/ProtectedRoute';
-import PrintTicket from './Screens/PrintTicket';
+import PrintTicket from './Screens/PrintTicket/PrintTicket';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Logout from './Screens/Logout'
+//import Logout from './Screens/Logout'
 
 
 
@@ -37,7 +37,7 @@ function App() {
             <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-            <Route path="/logout" element={<Logout />} />
+            {/* <Route path="/logout" element={<Logout />} /> */}
             <Route path="/signup" element={<Signup />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path='/flight' element={<FlightSearch/>}/>

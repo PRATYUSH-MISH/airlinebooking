@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Navbar from './Nav';
+import Navbar from '../Nav/Nav';
 import './AddPassengers.css';
 
 const AddPassengers = () => {

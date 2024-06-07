@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import card from '../static/img/card.png';
-import processgif from '../static/img/process.gif';
+//import card from '../img/card.png';
+import processgif from '../img/process.gif';
 import './Payment.css';
 
 const Payment = () => {

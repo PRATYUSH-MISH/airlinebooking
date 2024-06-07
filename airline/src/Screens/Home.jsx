@@ -1,6 +1,8 @@
+
+
 import React, { useEffect, useState, useMemo } from 'react';
-import Navbar from './Nav';
-import IMG2 from '../static/img/plane3.1.jpg';
+import Navbar from './Nav/Nav';
+import IMG2 from './img/plane3.1.jpg';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,13 +37,14 @@ const Home = () => {
     return data.filter(item => item.city.toLowerCase().includes(destination.toLowerCase()));
   }, [destination, data]);
 
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-//changes 
-   
+
+    if (!localStorage.getItem('authToken')) {
+      navigate('/login');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:8000/book', {
         method: 'POST',
@@ -71,9 +74,6 @@ const Home = () => {
     }
   };
 
-
-
-
   const handleOriginChange = (e) => {
     const inputValue = e.target.value;
     setOrigin(inputValue);
@@ -85,7 +85,6 @@ const Home = () => {
     setDestination(inputValue);
     setShowDestinationSuggestions(true);
   };
-
 
   const handleOriginSelect = (city) => {
     setOrigin(city);
@@ -260,5 +259,4 @@ const Home = () => {
 };
 
 export default Home;
-
 
