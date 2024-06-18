@@ -9,6 +9,8 @@ const AddPassengers = () => {
   const { flight, bookingId, bookingData } = location.state || {};
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
+  const [email, setEmail] = useState(''); // Add state for email
+
   const [gender, setGender] = useState('');
   const [passengers, setPassengers] = useState([]);
   const [message, setMessage] = useState('');
@@ -17,7 +19,7 @@ const AddPassengers = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const passengerData = { name, age, gender, bookingId };
+    const passengerData = { name, age, gender, bookingId ,email};
 
     try {
       const response = await fetch('http://localhost:8000/passengers/add', {
@@ -39,6 +41,7 @@ const AddPassengers = () => {
       setName('');
       setAge('');
       setGender('');
+      setEmail('');
     } catch (error) {
       setError('Error adding passenger: ' + error.message);
       setMessage('');
@@ -113,6 +116,15 @@ const AddPassengers = () => {
               <option value="other">Other</option>
             </select>
           </div>
+          <div>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
           <button type="submit">Add Passenger</button>
         </form>
         <div className="passenger-list">
@@ -120,7 +132,7 @@ const AddPassengers = () => {
           <ul>
             {passengers.map((p, index) => (
               <li key={index}>
-                {p.name}, {p.age} years old, {p.gender}
+                {p.name}, {p.age} years old, {p.gender}, {p.email}
               </li>
             ))}
           </ul>

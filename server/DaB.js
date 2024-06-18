@@ -11,7 +11,10 @@ let db;
 const connectToDatabase = async () => {
     if (!db) {
         await client.connect();
-        db = client.db("data");
+        db = {
+            data: client.db("data"),
+            test: client.db("test")
+        };
     }
     return db;
 };

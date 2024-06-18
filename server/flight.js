@@ -11,8 +11,8 @@ router.post('/check', async (req, res) => {
 
     try {
         const db = await connectToDatabase();
-        const flightsColl = db.collection("domesticflight");
-        const internationalFlightsColl = db.collection("internationalflight");
+        const flightsColl = db.data.collection("domesticflight");
+        const internationalFlightsColl = db.data.collection("internationalflight");
 
         const originCode = originAirport.code;
         const destinationCode = destinationAirport.code;
