@@ -1,9 +1,10 @@
 .print-ticket {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 700px;
+    margin:  auto;
+    margin-top:90px;
     padding: 20px;
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid #141111;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

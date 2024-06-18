@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { authenticateToken, generateToken } = require("./authenticateToken")
+const {  generateToken } = require("./authenticateToken")
 
 const app = express();
 const router = express.Router();

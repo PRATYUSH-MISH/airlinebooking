@@ -1,9 +1,10 @@
 /* General styling for the flight search component */
 .flight-search {
     max-width: 800px;
-    margin: 0 auto;
+    margin: auto;
+        margin-top: 20%;
     padding: 20px;
-    background-color: #0c0c0c;
+    background-color: #1e1e1e;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(162, 143, 143, 0.1);
 }
@@ -95,14 +96,14 @@
 }
 
 .flights-table th {
-    background-color: #efb3b3;
-    color: #333;
+    background-color: #605c5c;
+    color: #030303;
 }
 
 .flights-table td {
-    background-color: #201f1f;
+    background-color: #171616;
 }
 
 .flights-table tr:nth-child(even) td {
-    background-color: #0d0d0d;
+    background-color: #030303;
 }

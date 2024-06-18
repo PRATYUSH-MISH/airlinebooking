@@ -3,17 +3,18 @@
 .payment-container {
     max-width: 600px;
     margin: 0 auto;
+    margin-top: 20%;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(28, 25, 25, 0.1);
     text-align: center;
 }
 
 .payment-container h2 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: #050101;
 }
 
 .payment-options {
