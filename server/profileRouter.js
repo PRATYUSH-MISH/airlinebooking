@@ -33,11 +33,48 @@ router.get('/profile', authMiddleware.authenticateToken, async (req, res) => {
             user: {
                 name: user.name,
                 email: user.email,
+                age:user.age,
                 bookedFlights
             }
         });
     } catch (error) {
         console.error('Error fetching user profile:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+router.post('/profile/update', authMiddleware.authenticateToken, async (req, res) => {
+    try {
+        const userData = req.user;
+        const { name, age, gender, email } = req.body;
+        const db = await connectToDatabase();
+
+        const userColl = db.data.collection("passengers");
+
+        await userColl.updateOne(
+            { email: userData.email },
+            { $set: { name, age, gender, email } }
+        );
+
+        res.json({ message: 'Profile updated successfully' });
+    } catch (error) {
+        console.error('Error updating user profile:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.delete('/profile/bookedflights/:bookingId', authMiddleware.authenticateToken, async (req, res) => {
+    try {
+        const { bookingId } = req.params;
+        const userData = req.user;
+        const db = await connectToDatabase();
+
+        const passengerColl = db.data.collection("passengers");
+
+        await passengerColl.deleteOne({ bookingId, email: userData.email });
+
+        res.json({ message: 'Booked flight deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting booked flight:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
