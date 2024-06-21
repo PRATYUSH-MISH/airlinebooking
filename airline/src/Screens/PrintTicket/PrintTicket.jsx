@@ -1,12 +1,14 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import './PrintTicket.css';
+import axios from 'axios';
 
 const PrintTicket = () => {
     const location = useLocation();
-    const { bookingId, passengers = [], totalFare, paymentType, flight = {} } = location.state || {};
+    const navigate = useNavigate();
+    const { bookingId, passengers = [], totalFare, paymentType, flight = {}, origin, destination } = location.state || {};
 
     const {
         flight_no = 'N/A',
@@ -14,11 +16,32 @@ const PrintTicket = () => {
         depart_time = 'N/A',
         arrival_time = 'N/A',
         departDate = 'N/A',
+       
     } = flight;
 
-    const handleDownloadPDF = () => {
-        const doc = new jsPDF();
+    // Function to format date as dd-mm-yyyy
+    const formatDate = (dateString) => {
+        const dateObj = new Date(dateString);
+        const day = dateObj.getDate();
+        const month = dateObj.getMonth() + 1;
+        const year = dateObj.getFullYear();
+        return `${day}-${month}-${year}`;
+    }; 
+    // Extract origin and destination details
+    const originCity = origin ? origin.city : 'N/A';
+    const originCode = origin ? origin.code : 'N/A';
+    const destinationCity = destination ? destination.city : 'N/A';
+    const destinationCode = destination ? destination.code : 'N/A';
 
+    const handleDownloadPDF = async () => {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            console.error('User not authenticated');
+            navigate('/login'); // Redirect to login if not authenticated
+            return;
+        }
+
+        const doc = new jsPDF();
         doc.text('Booking Details', 10, 10);
         doc.autoTable({
             startY: 20,
@@ -30,9 +53,11 @@ const PrintTicket = () => {
                 ['Payment Method', paymentType],
                 ['Flight No', flight_no],
                 ['Airline', airline],
+                ['Origin', `${originCity} (${originCode})`],
+                ['Destination', `${destinationCity} (${destinationCode})`],
                 ['Departure Time', depart_time],
                 ['Arrival Time', arrival_time],
-                ['Flight Date', departDate],
+                ['Flight Date', departDate], // Display departDate
             ],
         });
 
@@ -41,16 +66,37 @@ const PrintTicket = () => {
             passenger.name,
             passenger.age,
             passenger.gender,
-        ]);//                                     20 is adjusting coordinate.
-         
+        ]);
+
         doc.text('Passenger Details', 10, doc.autoTable.previous.finalY + 20);
         doc.autoTable({
             head: [tableColumn],
-            body: tableRows, //                    it is y coordinate which will move table
+            body: tableRows,
             startY: doc.autoTable.previous.finalY + 30,
         });
 
         doc.save(`Ticket_${bookingId}.pdf`);
+
+        try {
+            // Send POST request to backend with departDate included
+            await axios.post('http://localhost:8000/api/tickets', {
+                bookingId,
+                passengers,
+                totalFare,
+                paymentType,
+                flight: {
+                    ...flight,
+                    origin: { city: originCity, code: originCode },
+                    destination: { city: destinationCity, code: destinationCode },
+                    departDate: departDate, // Include departDate
+                }
+            }, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            console.log('Ticket data sent to backend successfully');
+        } catch (error) {
+            console.error('Error sending ticket data to backend:', error);
+        }
     };
 
     return (
@@ -91,6 +137,14 @@ const PrintTicket = () => {
                         <td>{airline}</td>
                     </tr>
                     <tr>
+                        <td><strong>Origin</strong></td>
+                        <td>{`${originCity} (${originCode})`}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Destination</strong></td>
+                        <td>{`${destinationCity} (${destinationCode})`}</td>
+                    </tr>
+                    <tr>
                         <td><strong>Departure Time</strong></td>
                         <td>{depart_time}</td>
                     </tr>
@@ -100,7 +154,7 @@ const PrintTicket = () => {
                     </tr>
                     <tr>
                         <td><strong>Flight Date</strong></td>
-                        <td>{departDate}</td>
+                        <td>{formatDate(departDate)}</td>
                     </tr>
                 </tbody>
             </table>
@@ -131,7 +185,4 @@ const PrintTicket = () => {
 };
 
 export default PrintTicket;
-
-
-
 

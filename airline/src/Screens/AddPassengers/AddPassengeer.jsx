@@ -18,7 +18,10 @@ const AddPassengers = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!name || !age || !gender || !email) {
+      setError('All fields are required.');
+      return;
+    }
     const passengerData = { name, age, gender, bookingId ,email};
 
     try {
@@ -61,7 +64,9 @@ const AddPassengers = () => {
           arrival_time: flight.arrival_time,
           departDate: bookingData.departDate,
           fare: flight[`${bookingData.seat}_fare`]
-        }
+        },
+        origin: bookingData.originAirport,         // Include origin here
+        destination: bookingData.destinationAirport 
       }
     });
   };
@@ -77,12 +82,15 @@ const AddPassengers = () => {
         {error && <p className="error">{error}</p>}
         <div>
           <h3>Flight Details</h3>
-          <p>Flight No: {flight.flight_no}</p>
+        <strong>  <p>Flight No: {flight.flight_no}</p>
           <p>Airline: {flight.airline}</p>
+          <p>Origin: {bookingData.originAirport.city} ({bookingData.originAirport.code})</p>
+
           <p>Departure Time: {flight.depart_time}</p>
+          <p>Destination: {bookingData.destinationAirport.city} ({bookingData.destinationAirport.code})</p>
           <p>Arrival Time: {flight.arrival_time}</p>
-          <p>Duration: {flight.duration}</p>
-          <p>Fare: {flight[`${bookingData.seat}_fare`]}</p>
+          <p>Duration: {flight.duration} Hours </p>
+            <p>Fare: {flight[`${bookingData.seat}_fare`]}</p></strong>
         </div>
         <form onSubmit={handleSubmit}>
           <div>
@@ -117,7 +125,7 @@ const AddPassengers = () => {
             </select>
           </div>
           <div>
-            <label>Email:</label>
+            <label>Email:(Registered Email Only)</label>
             <input
               type="email"
               value={email}

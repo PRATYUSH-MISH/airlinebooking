@@ -11,6 +11,7 @@ import FlightSearch from './Screens/Flight/Flight';
 import Navbar from './Screens/Nav/Nav';
 import Payment from './Screens/Payment/Payment';
 import AddPassengers from './Screens/AddPassengers/AddPassengeer';
+import Ticket from './Screens/UserProfile/Ticket'
 //import ProtectedRoute from './Screens/ProtectedRoute';
 import PrintTicket from './Screens/PrintTicket/PrintTicket';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -45,6 +46,7 @@ function App() {
             <Route path='/payment' element={<Payment/>}/>
             
             <Route path='/printticket' element={<PrintTicket />} />
+            <Route path='/tickets/:bookingId' element={<Ticket />} />
 
             {/* Define other routes that you need*/}
           </Routes>

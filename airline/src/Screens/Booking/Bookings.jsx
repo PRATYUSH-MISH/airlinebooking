@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../Nav/Nav';
 import './Bookings.css';
 
-const Bookings = ({ isLoggedIn }) => {
+const Bookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -44,7 +44,7 @@ const Bookings = ({ isLoggedIn }) => {
     return (
         <>
             {/* <Navbar isLoggedIn={isLoggedIn} /> */}
-          
+            <Navbar />
             <div className="bookings">
                 <h1>My Bookings</h1>
                 {bookings.length === 0 ? (

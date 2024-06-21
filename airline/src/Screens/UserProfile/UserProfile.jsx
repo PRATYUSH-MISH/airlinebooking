@@ -73,6 +73,10 @@ const UserProfile = () => {
     }
   };
 
+  const handleDownloadTicket=(bookingId)=>{
+    navigate(`/tickets/${bookingId}`)
+  }
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -101,6 +105,7 @@ const UserProfile = () => {
                 <li key={index}>
                   Booking ID: {flight.bookingId}, Name: {flight.name}, Age: {flight.age}, Gender: {flight.gender}
                   <button onClick={() => handleFlightDelete(flight.bookingId)}>Delete</button>
+                  <button onClick={() => handleDownloadTicket(flight.bookingId)}>Download Ticket</button>
                 </li>
               ))}
             </ul>

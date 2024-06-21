@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Nav/Nav';
@@ -56,11 +57,17 @@ const FlightSearch = () => {
         fetchFlights();
     }, [bookingData]);
 
-    const handleSelectFlight = (flight) => {
-        const bookingId = `BOOK-${Date.now()}`;
-        navigate('/addpassenger', { state: { flight, bookingId, bookingData } });
+    const generateBookingId = () => {
+        const timestamp = Date.now();
+        const randomNum = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
+        return `BOOK-${timestamp}-${randomNum}`;
     };
 
+    const handleSelectFlight = (flight) => {
+        const bookingId = generateBookingId();
+        navigate('/addpassenger', { state: { flight, bookingId, bookingData } });
+    };
+    
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -73,6 +80,13 @@ const FlightSearch = () => {
         <>
             <Navbar />
             <div className="flight-search">
+                <div className="flight-info">
+                    <h2>Flight Search Results</h2>
+                    <p><strong>Origin:</strong> {bookingData.originAirport.city} ({bookingData.originAirport.code}) </p>
+                    <p><strong>Destination:</strong> {bookingData.destinationAirport.city} ({bookingData.destinationAirport.code})</p>
+                    <p><strong>Departure Date:</strong> {bookingData.departDate}</p>
+                    <p><strong>Seat Type:</strong> {bookingData.seat}</p>
+                </div>
                 <div className="flight-results">
                     <h2>Available Flights</h2>
                     {error && <p>{error}</p>}
@@ -88,6 +102,7 @@ const FlightSearch = () => {
                                     <th>Arrival Time</th>
                                     <th>Duration</th>
                                     <th>Fare</th>
+                                        
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -100,6 +115,8 @@ const FlightSearch = () => {
                                         <td>{flight.arrival_time}</td>
                                         <td>{flight.duration}</td>
                                         <td>{flight[`${bookingData.seat}_fare`]}</td>
+
+                                        
                                         <td>
                                             <button onClick={() => handleSelectFlight(flight)}>
                                                 Select
@@ -117,4 +134,3 @@ const FlightSearch = () => {
 };
 
 export default FlightSearch;
-

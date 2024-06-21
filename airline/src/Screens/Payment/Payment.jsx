@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-//import card from '../img/card.png';
 import processgif from '../img/process.gif';
 import './Payment.css';
 
 const Payment = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { bookingId, passengers, totalFare, flight } = location.state || {};
+    const { bookingId, passengers, totalFare, flight, origin, destination } = location.state || {};
     const [isProcessing, setIsProcessing] = useState(false);
     const [selectedPayment, setSelectedPayment] = useState('');
 
@@ -24,7 +23,9 @@ const Payment = () => {
                     passengers,
                     totalFare,
                     paymentType,
-                    flight
+                    flight,
+                    origin,        // Include origin data
+                    destination    // Include destination data
                 }
             });
         }, 4000);
@@ -42,6 +43,8 @@ const Payment = () => {
                     <h2>Choose Payment Method</h2>
                     <p>Booking ID: {bookingId}</p>
                     <p>Total Fare: {totalFare}</p>
+                    <p>Origin: {origin.city} ({origin.code})</p> {/* Display origin details */}
+                    <p>Destination: {destination.city} ({destination.code})</p> {/* Display destination details */}
                     <div className="payment-options">
                         <button onClick={() => handlePayment('UPI')}>UPI</button>
                         <button onClick={() => handlePayment('Net Banking')}>Net Banking</button>
@@ -54,7 +57,3 @@ const Payment = () => {
 };
 
 export default Payment;
-
-
-
-

@@ -7,6 +7,7 @@ const flightRouter=require('./flight')
 const addPassengersRoute = require('./addPassengers');
 const profileRouter = require('./profileRouter'); // Add this line
 const bookings = require('./bookings')
+const TicketRouter=require('./TicketRouter')
 
 const bookRouter = require('./Book');
 const connectToDatabase = require('./db'); // Import the database connection function
@@ -36,6 +37,7 @@ connectToDatabase()
         app.use('/passengers', addPassengersRoute);
         app.use('/api/bookings', bookings); 
         app.use( profileRouter);
+        app.use('/api',TicketRouter)
         // Use profile router 
         
         app.listen(8000, () => {

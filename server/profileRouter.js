@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('./authenticateToken');
+///const path = require('path'); // Import path module
+
 const { connectToDatabase } = require('./DaB');
+
 
 
 router.get('/profile', authMiddleware.authenticateToken, async (req, res) => {
@@ -42,6 +45,10 @@ router.get('/profile', authMiddleware.authenticateToken, async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+
+
+
 router.post('/profile/update', authMiddleware.authenticateToken, async (req, res) => {
     try {
         const userData = req.user;
