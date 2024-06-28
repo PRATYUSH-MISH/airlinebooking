@@ -49,3 +49,126 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(1) {
+    width: 1520px;
+    max-width: 1520px;
+    height: 503px;
+    max-height: 503px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(1)>img:nth-child(1) {
+    width: 227px;
+    max-width: 227px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1) {
+    width: 1529px;
+    max-width: 1529px;
+    height: 1071px;
+    max-height: 1071px;
+    color: rgb(0, 0, 0);
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>h2:nth-child(1) {
+    color: rgb(0, 0, 0);
+    font-weight: 800;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>h3:nth-child(2) {
+    color: rgb(0, 0, 0);
+    font-weight: 800;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(3)>tbody:nth-child(1)>tr:nth-child(1)>td:nth-child(1) {
+    color: rgb(0, 0, 0);
+    width: 180px;
+    max-width: 180px;
+    height: 49px;
+    max-height: 49px;
+    margin-top: 0px;
+    padding-top: 5px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px;
+    margin-left: 6px;
+    padding-left: 8px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(3)>tbody:nth-child(1)>tr:nth-child(1)>td:nth-child(2) {
+    color: rgb(0, 0, 0);
+    width: 1217px;
+    max-width: 1217px;
+    margin-top: -1px;
+    margin-left: 0px;
+    padding-left: 5px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(3)>tbody:nth-child(1)>tr:nth-child(2)>td:nth-child(1) {
+    color: rgb(0, 0, 0);
+    width: 260px;
+    max-width: 260px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(3)>tbody:nth-child(1)>tr:nth-child(2)>td:nth-child(2) {
+    color: rgb(0, 0, 0);
+    width: 1252px;
+    max-width: 1252px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(3)>tbody:nth-child(1)>tr:nth-child(3)>td:nth-child(1) {
+    color: rgb(0, 0, 0);
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(3)>tbody:nth-child(1)>tr:nth-child(4)>td:nth-child(1) {
+    color: rgb(0, 0, 0);
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>h3:nth-child(4) {
+    color: rgb(0, 0, 0);
+    font-weight: 800;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(3)>tbody:nth-child(1)>tr:nth-child(3)>td:nth-child(2) {
+    color: rgb(0, 0, 0);
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(3)>tbody:nth-child(1)>tr:nth-child(4)>td:nth-child(2) {
+    color: rgb(0, 0, 0);
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>h3:nth-child(6) {
+    margin-left: 101px;
+    margin-right: 197px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(7)>thead:nth-child(1)>tr:nth-child(1)>th:nth-child(1) {
+    margin-right: 0px;
+    padding-left: 8px;
+    margin-left: 0px;
+    width: 267px;
+    max-width: 267px;
+    margin-top: 1px;
+    padding-top: 8px;
+    padding-right: 8px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(5)>tbody:nth-child(1)>tr:nth-child(1)>td:nth-child(1) {
+    width: 280px;
+    max-width: 280px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(7)>tbody:nth-child(2)>tr:nth-child(1)>td:nth-child(1) {
+    width: 280px;
+    max-width: 280px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(7)>thead:nth-child(1)>tr:nth-child(1)>th:nth-child(2) {
+    width: 280px;
+    max-width: 280px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>table:nth-child(7)>thead:nth-child(1)>tr:nth-child(1)>th:nth-child(3) {
+    width: 280px;
+    max-width: 280px;
+}

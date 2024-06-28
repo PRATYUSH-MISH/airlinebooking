@@ -38,7 +38,7 @@ function App() {
             <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-            {/* <Route path="/logout" element={<Logout />} /> */}
+            
             <Route path="/signup" element={<Signup />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path='/flight' element={<FlightSearch/>}/>

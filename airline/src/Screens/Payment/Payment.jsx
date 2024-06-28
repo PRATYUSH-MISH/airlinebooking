@@ -28,7 +28,7 @@ const Payment = () => {
                     destination    // Include destination data
                 }
             });
-        }, 4000);
+        },4000);
     };
 
     return (

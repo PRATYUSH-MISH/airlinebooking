@@ -87,7 +87,7 @@ const UserProfile = () => {
 
   return (
     <div className='user-profile'>
-      <Navbar />
+    
       <h2>User Profile</h2>
       {userProfile && (
         <div>
@@ -104,17 +104,18 @@ const UserProfile = () => {
               {userProfile.bookedFlights.map((flight, index) => (
                 <li key={index}>
                   Booking ID: {flight.bookingId}, Name: {flight.name}, Age: {flight.age}, Gender: {flight.gender}
-                  <button onClick={() => handleFlightDelete(flight.bookingId)}>Delete</button>
-                  <button onClick={() => handleDownloadTicket(flight.bookingId)}>Download Ticket</button>
+                  <button className="delete-button" onClick={() => handleFlightDelete(flight.bookingId)}>Delete</button>
+                  <button className="download-button" onClick={() => handleDownloadTicket(flight.bookingId)}>Download Ticket</button>
                 </li>
               ))}
             </ul>
           ) : (
-            <p>No booked flights found.</p>
+              <p className="no-flights">No booked flights found.</p>
           )}
         </div>
       )}
     </div>
+  
   );
 };
 

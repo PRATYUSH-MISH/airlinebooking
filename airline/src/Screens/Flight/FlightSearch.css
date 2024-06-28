@@ -2,9 +2,9 @@
 .flight-search {
     max-width: 800px;
     margin: auto;
-        margin-top: 20%;
+    margin-top: 5%;
     padding: 20px;
-    background-color: #1e1e1e;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(162, 143, 143, 0.1);
 }
@@ -12,8 +12,10 @@
 .flight-search h1 {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 24px;
-    color: #f3d2d2;
+    font-size: 2rem;
+    color: #333333;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .flight-search form {
@@ -28,22 +30,23 @@
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #f8eeee;
+    color: #333333;
 }
 
 .input-row input[type="text"],
 .input-row input[type="date"],
 .input-row input[type="radio"] {
-    width: calc(100% - 12px);
-    padding: 8px;
+    width: calc(100% - 16px);
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .form-check-inline {
     display: inline-block;
     margin-right: 10px;
+    color: #333333;
 }
 
 .btn {
@@ -55,7 +58,8 @@
     border-radius: 4px;
     cursor: pointer;
     text-align: center;
-    font-size: 16px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary {
@@ -78,8 +82,8 @@
 .flight-results h2 {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 20px;
-    color: #fcfcfc;
+    font-size: 1.5rem;
+    color: #333333;
 }
 
 .flights-table {
@@ -91,19 +95,33 @@
 .flights-table th,
 .flights-table td {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 12px;
     text-align: left;
+    font-size: 1rem;
 }
 
 .flights-table th {
-    background-color: #605c5c;
-    color: #030303;
+    background-color: #f2f2f2;
+    color: #333333;
 }
 
 .flights-table td {
-    background-color: #171616;
+    background-color: #ffffff;
 }
 
 .flights-table tr:nth-child(even) td {
-    background-color: #030303;
+    background-color: #f9f9f9;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .flight-search {
+        padding: 10px;
+    }
+
+    .input-row input[type="text"],
+    .input-row input[type="date"],
+    .input-row input[type="radio"] {
+        width: 100%;
+    }
 }

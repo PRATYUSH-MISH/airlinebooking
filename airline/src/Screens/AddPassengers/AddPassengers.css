@@ -1,8 +1,7 @@
-/* AddPassengers.css */
+
 
 .add-passenger {
-    max-width: 600px;
-        
+    max-width: 800px;
     margin: 0 auto;
     margin-top: 50px;
     padding: 20px;
@@ -11,10 +10,36 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.add-passenger h2, .add-passenger h3 {
+.add-passenger h2 {
     margin-bottom: 20px;
+    
     font-size: 24px;
     color: #0e0d0d;
+    font-weight: bold;
+    text-align: center;
+}
+
+.add-passenger h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #0e0d0d;
+    text-align: center;
+    font-weight: bold;
+}
+
+.flight-details {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.flight-details p {
+    margin: 5px 0;
+    color: #333333;
+}
+
+.flight-details strong {
+    display: block;
+    margin-bottom: 10px;
 }
 
 .add-passenger form {
@@ -22,7 +47,7 @@
     flex-direction: column;
 }
 
-.add-passenger form > div {
+.add-passenger form>div {
     margin-bottom: 15px;
 }
 
@@ -32,7 +57,8 @@
     font-weight: bold;
 }
 
-.add-passenger input, .add-passenger select {
+.add-passenger input,
+.add-passenger select {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -58,11 +84,13 @@
 .success {
     color: green;
     font-weight: bold;
+    margin-top: 10px;
 }
 
 .error {
     color: red;
     font-weight: bold;
+    margin-top: 10px;
 }
 
 .passenger-list {
@@ -76,4 +104,191 @@
 
 .passenger-list li {
     margin-bottom: 10px;
+}
+
+.passenger-list p {
+    margin: 5px 0;
+    color: #333333;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .add-passenger {
+        margin-top: 20px;
+        padding: 15px;
+    }
+
+    .add-passenger h2,
+    .add-passenger h3 {
+        font-size: 1.25rem;
+    }
+
+    .flight-details p,
+    .add-passenger input,
+    .add-passenger select {
+        padding: 8px;
+    }
+
+    .add-passenger button {
+        padding: 8px 16px;
+        font-size: 0.875rem;
+    }
+
+    .passenger-list li,
+    .passenger-list p {
+        font-size: 0.875rem;
+    }
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1) {
+    width: 538px;
+    max-width: 538px;
+    height: 1064px;
+    max-height: 1064px;
+    margin-top: 126px;
+    margin-left: 21px;
+    margin-right: 21px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>form:nth-child(3) {
+    width: 415px;
+    max-width: 415px;
+    height: 508px;
+    max-height: 508px;
+    margin-top: -418px;
+    margin-left: 536px;
+    color: rgb(168, 168, 168);
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(4) {
+    color: rgb(0, 0, 0);
+    width: 419px;
+    max-width: 419px;
+    margin-top: -425px;
+    margin-left: 1010px;
+    height: 127px;
+    max-height: 127px;
+}
+
+
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1) {
+    width: 668px;
+    max-width: 668px;
+    height: 1092px;
+    max-height: 1092px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>p:nth-child(2) {
+    color: rgb(3, 191, 97);
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>form:nth-child(4) {
+    width: 419px;
+    max-width: 419px;
+    margin-top: -501px;
+    margin-left: 613px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2) {
+    width: 1539px;
+    max-width: 1539px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>form:nth-child(4)>button:nth-child(5) {
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(5) {
+    width: 325px;
+    max-width: 325px;
+    margin-top: -391px;
+    margin-left: 1092px;
+}
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(2)>h3:nth-child(1) {
+    width: 300px;
+    max-width: 300px;
+    margin-top: 14px;
+    margin-left: -51px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>form:nth-child(3) {
+    width: 394px;
+    max-width: 394px;
+    margin-top: -480px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>h2:nth-child(1) {
+    width: 1494px;
+    max-width: 1494px;
+    margin-top: -33px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>p:nth-child(2) {
+    width: 1512px;
+    max-width: 1512px;
+    margin-top: -7px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(5) {
+    margin-top: -460px;
+    margin-left: 1050px;
+    padding-left: 1px;
+    padding-top: 0px;
+    width: 421px;
+    max-width: 421px;
+    height: 294px;
+    max-height: 294px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(5)>button:nth-child(5) {
+    border-top-width: 19px;
+    border-right-width: 19px;
+    border-bottom-width: 19px;
+    border-left-width: 19px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+}
+
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1) {
+    margin-top: 115px;
+    width: 1545px;
+    max-width: 1545px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>form:nth-child(4) {
+    margin-top: -500px;
+    margin-left: 496px;
+    width: 419px;
+    max-width: 419px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>form:nth-child(4)>div:nth-child(1)>label:nth-child(1) {
+    width: 436px;
+    max-width: 436px;
+    margin-left: 0px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(3)>h3:nth-child(1) {
+    margin-left: -1316px;
+    padding-left: 0px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>h2:nth-child(1) {
+    margin-top: -30px;
+}
+
+#root>div:nth-child(1)>header:nth-child(1) {
+    width: 1532px;
+    max-width: 1532px;
 }

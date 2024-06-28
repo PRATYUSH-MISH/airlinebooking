@@ -1,7 +1,6 @@
 
 
 import React, { useEffect, useState, useMemo } from 'react';
-import Navbar from './Nav/Nav';
 import IMG2 from './img/plane3.1.jpg';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
@@ -19,8 +18,8 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  const minDate = '2023-01-01';
-  const maxDate = '2023-12-31';
+  const minDate = '2024-01-01';
+  const maxDate = '2030-12-31';
 
   useEffect(() => {
     fetch('http://localhost:8000/')
@@ -30,11 +29,11 @@ const Home = () => {
   }, []);
 
   const filteredOrigins = useMemo(() => {
-    return data.filter(item => item.city.toLowerCase().includes(origin.toLowerCase()));
+    return data.filter(item => item.city.toLowerCase().includes(origin.toLowerCase())).slice(0, 2);
   }, [origin, data]);
 
   const filteredDestinations = useMemo(() => {
-    return data.filter(item => item.city.toLowerCase().includes(destination.toLowerCase()));
+    return data.filter(item => item.city.toLowerCase().includes(destination.toLowerCase())).slice(0, 2);
   }, [destination, data]);
 
   const handleSubmit = async (e) => {
@@ -98,7 +97,6 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
       <div className="home">
         <section className="section first-section" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(${IMG2})` }}>
           <div className="banner-div">
@@ -259,4 +257,3 @@ const Home = () => {
 };
 
 export default Home;
-

@@ -75,22 +75,21 @@ const AddPassengers = () => {
 
   return (
     <>
-      <Navbar />
+     
       <div className="add-passenger">
         <h2>Add Passenger</h2>
         {message && <p className="success">{message}</p>}
         {error && <p className="error">{error}</p>}
         <div>
           <h3>Flight Details</h3>
-        <strong>  <p>Flight No: {flight.flight_no}</p>
-          <p>Airline: {flight.airline}</p>
-          <p>Origin: {bookingData.originAirport.city} ({bookingData.originAirport.code})</p>
-
-          <p>Departure Time: {flight.depart_time}</p>
-          <p>Destination: {bookingData.destinationAirport.city} ({bookingData.destinationAirport.code})</p>
-          <p>Arrival Time: {flight.arrival_time}</p>
-          <p>Duration: {flight.duration} Hours </p>
-            <p>Fare: {flight[`${bookingData.seat}_fare`]}</p></strong>
+          <p><strong>Flight No:</strong> {flight.flight_no}</p>
+          <p><strong>Airline:</strong> {flight.airline}</p>
+          <p><strong>Origin:</strong> {bookingData.originAirport.city} ({bookingData.originAirport.code})</p>
+          <p><strong>Departure Time:</strong> {flight.depart_time}</p>
+          <p><strong>Destination:</strong> {bookingData.destinationAirport.city} ({bookingData.destinationAirport.code})</p>
+          <p><strong>Arrival Time:</strong> {flight.arrival_time}</p>
+          <p><strong>Duration:</strong> {flight.duration} Hours</p>
+          <p><strong>Fare:</strong> {flight[`${bookingData.seat}_fare`]}</p>
         </div>
         <form onSubmit={handleSubmit}>
           <div>
@@ -125,7 +124,7 @@ const AddPassengers = () => {
             </select>
           </div>
           <div>
-            <label>Email:(Registered Email Only)</label>
+            <label>Email: (Registered Email Only)</label>
             <input
               type="email"
               value={email}
@@ -147,11 +146,10 @@ const AddPassengers = () => {
           <p>Total Passengers: {passengers.length}</p>
           <p>Total Fare: {totalFare}</p>
           {passengers.length > 0 && (
-            <button onClick={handlePayment}>Proceed to Payment</button>
+            <button className="proceed-button" onClick={handlePayment}>Proceed to Payment</button>
           )}
         </div>
-      </div>
-    </>
+      </div></>
   );
 };
 

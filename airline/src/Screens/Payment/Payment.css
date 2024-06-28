@@ -5,7 +5,7 @@
     margin: 0 auto;
     margin-top: 20%;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(28, 25, 25, 0.1);
     text-align: center;
@@ -16,7 +16,50 @@
     font-size: 24px;
     color: #050101;
 }
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1) {
+    width: 1537px;
+    max-width: 1537px;
+    height: 621px;
+    max-height: 621px;
+    line-height: 36px;
+    font-size: 18px;
+    letter-spacing: 4px;
+    margin-top: 83px;
+    margin-left: -4px;
+    margin-bottom: 0px;
+}
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(6)>button:nth-child(2) {
+    width: 163px;
+    max-width: 163px;
+    height: 61px;
+    max-height: 61px;
+}
 
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(6)>button:nth-child(1) {
+    width: 163px;
+    max-width: 163px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>div:nth-child(6)>button:nth-child(3) {
+    width: 163px;
+    max-width: 163px;
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>p:nth-child(2) {
+    color: rgb(0, 0, 0);
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>p:nth-child(3) {
+    color: rgb(0, 0, 0);
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>p:nth-child(4) {
+    color: rgb(0, 0, 0);
+}
+
+#root>div:nth-child(1)>main:nth-child(2)>div:nth-child(1)>p:nth-child(5) {
+    color: rgb(0, 0, 0);
+}
 .payment-options {
     display: flex;
     justify-content: center;

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../Nav/Nav';
+
 import './FlightSearch.css';
 import { useLocation } from 'react-router-dom';
 
@@ -78,7 +78,7 @@ const FlightSearch = () => {
 
     return (
         <>
-            <Navbar />
+            
             <div className="flight-search">
                 <div className="flight-info">
                     <h2>Flight Search Results</h2>
