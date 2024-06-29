@@ -26,7 +26,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.json());
-
+app.get('/', (req, res) => {
+    res.send('hello');
+});
 // Connect to the database
 connectToDatabase()
     .then(() => {
